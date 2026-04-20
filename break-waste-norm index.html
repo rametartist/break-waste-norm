@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Break the Waste Norm — AI in the Loop</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal: #1a8f8a;
+  --teal-light: #2bb8b2;
+  --teal-dim: #0d5c59;
+  --sapphire: #1a3a7a;
+  --sapphire-light: #2a52a8;
+  --sapphire-dark: #0e2050;
+  --red: #b82030;
+  --red-light: #d43040;
+  --gray-100: #f4f4f2;
+  --gray-200: #e8e8e4;
+  --gray-300: #c8c8c2;
+  --gray-500: #8a8a82;
+  --gray-700: #4a4a44;
+  --gray-900: #1a1a16;
+  --white: #ffffff;
+  --serif: 'Syne', sans-serif;
+  --body: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  background: var(--gray-100);
+  color: var(--gray-900);
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(26,26,22,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--teal-light);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--teal-light); }
+.nav-cta {
+  font-family: var(--serif);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 20px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--red-light); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  background: var(--gray-900);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-left {
+  padding: 140px 60px 80px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal-light);
+  margin-bottom: 28px;
+}
+.hero-tag::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--teal-light);
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: clamp(52px, 6vw, 86px);
+  line-height: 0.92;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.hero-title .accent {
+  color: var(--teal-light);
+  display: block;
+}
+.hero-title .strike {
+  position: relative;
+  color: var(--gray-500);
+}
+.hero-title .strike::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: 3px;
+  background: var(--red);
+  transform: translateY(-50%) rotate(-1deg);
+}
+
+.hero-subtitle {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gray-300);
+  margin: 24px 0 40px;
+  letter-spacing: 0.02em;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+.hero-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hero-meta-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+.hero-meta-value {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+}
+.hero-meta-value span {
+  color: var(--teal-light);
+}
+
+.hero-cta-group {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.btn-primary {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 14px 32px;
+  background: var(--teal);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--teal-light); }
+.btn-ghost {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-300);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+.btn-ghost:hover { color: var(--white); }
+.btn-ghost::after { content: '↓'; }
+
+.hero-right {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Big geometric arrow */
+.hero-arrow-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.arrow-giant {
+  font-family: var(--serif);
+  font-size: 320px;
+  font-weight: 800;
+  color: rgba(42,184,178,0.06);
+  line-height: 1;
+  user-select: none;
+  animation: pulse-arrow 4s ease-in-out infinite;
+}
+@keyframes pulse-arrow {
+  0%, 100% { opacity: 0.6; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(12px); }
+}
+
+.hero-panel {
+  position: absolute;
+  bottom: 60px;
+  left: 40px;
+  right: 40px;
+  background: rgba(26,58,122,0.5);
+  border: 1px solid rgba(42,82,168,0.3);
+  padding: 28px 32px;
+  backdrop-filter: blur(4px);
+}
+.hero-panel-title {
+  font-family: var(--serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(42,184,178,0.8);
+  margin-bottom: 16px;
+}
+.hero-loop-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.hero-loop-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hero-loop-num {
+  font-family: var(--serif);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: 0.1em;
+}
+.hero-loop-text {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.4;
+}
+
+/* Diagonal divider */
+.hero-divider {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: -1px;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--teal-dim), transparent);
+}
+
+/* ─── MANIFESTO STRIP ─── */
+.manifesto-strip {
+  background: var(--sapphire-dark);
+  padding: 20px 0;
+  overflow: hidden;
+  border-top: 2px solid var(--teal-dim);
+  border-bottom: 2px solid var(--teal-dim);
+}
+.manifesto-ticker {
+  display: flex;
+  gap: 60px;
+  animation: ticker 20s linear infinite;
+  white-space: nowrap;
+}
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.manifesto-word {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+.manifesto-word.highlight {
+  color: var(--teal-light);
+}
+.manifesto-sep {
+  color: var(--red);
+  font-weight: 800;
+}
+
+/* ─── PRINCIPLES ─── */
+.section {
+  padding: 100px 72px;
+}
+.section-label {
+  font-family: var(--serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--teal);
+}
+.section-title {
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.0;
+  color: var(--gray-900);
+  margin-bottom: 60px;
+}
+.section-title em {
+  font-style: normal;
+  color: var(--teal-dim);
+}
+
+/* Principles cards */
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.principle-card {
+  background: var(--white);
+  padding: 40px 36px;
+  border-top: 3px solid transparent;
+  transition: border-color 0.2s, transform 0.2s;
+  cursor: default;
+}
+.principle-card:nth-child(1) { border-top-color: var(--teal); }
+.principle-card:nth-child(2) { border-top-color: var(--sapphire); }
+.principle-card:nth-child(3) { border-top-color: var(--red); }
+.principle-card:hover { transform: translateY(-4px); }
+
+.principle-icon {
+  font-size: 28px;
+  margin-bottom: 20px;
+  display: block;
+}
+.principle-title {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.principle-body {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--gray-700);
+}
+
+/* ─── WASTE AUDIT (BEFORE/AFTER) ─── */
+.waste-section {
+  background: var(--gray-900);
+  padding: 100px 72px;
+}
+.waste-section .section-title {
+  color: var(--white);
+}
+.waste-section .section-title em {
+  color: var(--teal-light);
+}
+
+.waste-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  margin-top: 60px;
+}
+.waste-card {
+  padding: 40px 40px;
+}
+.waste-card.before {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.waste-card.after {
+  background: rgba(26,143,138,0.12);
+  border: 1px solid rgba(42,184,178,0.25);
+}
+.waste-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+.waste-badge {
+  font-family: var(--serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+}
+.waste-badge.before { background: rgba(184,32,48,0.2); color: var(--red-light); }
+.waste-badge.after { background: rgba(26,143,138,0.3); color: var(--teal-light); }
+
+.waste-item {
+  display: flex;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.waste-item:last-child { border-bottom: none; }
+.waste-metric {
+  font-family: var(--serif);
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1;
+  min-width: 80px;
+}
+.waste-metric.red { color: rgba(212,48,64,0.9); }
+.waste-metric.teal { color: var(--teal-light); }
+.waste-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.waste-item-title {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--white);
+}
+.waste-item-sub {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--gray-500);
+  line-height: 1.5;
+}
+
+.waste-divider {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--teal-dim);
+  padding: 12px;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--teal-light);
+  letter-spacing: 0.12em;
+}
+
+/* ─── SCHEDULE ─── */
+.schedule-section {
+  background: var(--white);
+  padding: 100px 72px;
+}
+
+.day-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 48px;
+  border-bottom: 2px solid var(--gray-200);
+}
+.day-tab {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  color: var(--gray-500);
+  transition: all 0.2s;
+}
+.day-tab.active {
+  color: var(--sapphire);
+  border-bottom-color: var(--sapphire);
+}
+
+.schedule-timeline {
+  display: grid;
+  gap: 3px;
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 0;
+  background: var(--gray-200);
+}
+.schedule-time {
+  background: var(--gray-100);
+  padding: 20px 20px;
+  font-family: var(--serif);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gray-500);
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 22px;
+}
+.schedule-content {
+  background: var(--white);
+  padding: 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.schedule-session {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+.schedule-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--gray-700);
+  line-height: 1.5;
+}
+.schedule-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+}
+.tag.creative { background: rgba(26,58,122,0.08); color: var(--sapphire); }
+.tag.media { background: rgba(26,143,138,0.1); color: var(--teal-dim); }
+.tag.joint { background: rgba(184,32,48,0.08); color: var(--red); }
+.tag.ai { background: rgba(42,82,168,0.08); color: var(--sapphire-light); }
+
+/* ─── PHASE LOOP (Creative / Media) ─── */
+.loop-section {
+  background: var(--gray-100);
+  padding: 100px 72px;
+}
+
+.loop-tabs {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 48px;
+}
+.loop-tab {
+  font-family: var(--serif);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  cursor: pointer;
+  color: var(--gray-500);
+  transition: all 0.15s;
+}
+.loop-tab.active {
+  background: var(--sapphire-dark);
+  color: var(--teal-light);
+  border-color: var(--sapphire-dark);
+}
+
+.phases-container {
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+}
+.phases-container.active {
+  display: grid;
+}
+
+.phase-card {
+  background: var(--white);
+  padding: 0;
+  overflow: hidden;
+}
+.phase-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--gray-200);
+}
+.phase-num {
+  font-family: var(--serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  margin-bottom: 6px;
+}
+.phase-title {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray-900);
+  line-height: 1.3;
+}
+.phase-time {
+  font-size: 11px;
+  color: var(--teal);
+  margin-top: 4px;
+}
+.phase-body {
+  padding: 20px 24px;
+}
+.phase-output {
+  background: var(--gray-100);
+  padding: 12px 16px;
+  margin-top: 16px;
+}
+.phase-output-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal-dim);
+  margin-bottom: 4px;
+}
+.phase-output-text {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-700);
+  line-height: 1.4;
+}
+.phase-points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.phase-points li {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--gray-700);
+  line-height: 1.5;
+  padding-left: 14px;
+  position: relative;
+}
+.phase-points li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--teal);
+  font-size: 11px;
+}
+
+.phase-card:nth-child(1) .phase-header { border-left: 3px solid var(--teal); }
+.phase-card:nth-child(2) .phase-header { border-left: 3px solid var(--sapphire-light); }
+.phase-card:nth-child(3) .phase-header { border-left: 3px solid var(--teal-dim); }
+.phase-card:nth-child(4) .phase-header { border-left: 3px solid var(--red); }
+
+/* ─── COMMITMENTS ─── */
+.commit-section {
+  background: var(--sapphire-dark);
+  padding: 100px 72px;
+  position: relative;
+  overflow: hidden;
+}
+.commit-bg-text {
+  position: absolute;
+  bottom: -20px;
+  right: -10px;
+  font-family: var(--serif);
+  font-size: 200px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.02);
+  user-select: none;
+  line-height: 1;
+}
+.commit-section .section-title {
+  color: var(--white);
+}
+.commit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 60px;
+}
+.commit-team {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 36px;
+}
+.commit-team-tag {
+  font-family: var(--serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  margin-bottom: 24px;
+  display: inline-block;
+}
+.commit-team-tag.creative { background: rgba(42,82,168,0.3); color: #7ba4f0; }
+.commit-team-tag.media { background: rgba(26,143,138,0.3); color: var(--teal-light); }
+.commit-team-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+.commit-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.commit-items li {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.5;
+  padding-left: 22px;
+  position: relative;
+}
+.commit-items li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 8px;
+  height: 1px;
+  background: var(--teal);
+}
+
+.commit-shared {
+  grid-column: 1 / -1;
+  background: rgba(26,143,138,0.1);
+  border: 1px solid rgba(42,184,178,0.2);
+  padding: 36px;
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+.commit-shared-icon {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--teal-light);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.commit-shared-body {}
+.commit-shared-label {
+  font-family: var(--serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal-light);
+  margin-bottom: 10px;
+}
+.commit-shared-text {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.65;
+}
+.commit-shared-text strong {
+  color: var(--white);
+  font-weight: 500;
+}
+
+/* ─── CLOSING QUOTE ─── */
+.quote-section {
+  background: var(--gray-900);
+  padding: 100px 72px;
+  text-align: center;
+}
+.quote-mark {
+  font-family: var(--serif);
+  font-size: 80px;
+  font-weight: 800;
+  color: var(--teal-dim);
+  line-height: 0.6;
+  margin-bottom: 32px;
+}
+.quote-text {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.5vw, 30px);
+  font-weight: 600;
+  color: var(--white);
+  max-width: 760px;
+  margin: 0 auto 40px;
+  line-height: 1.4;
+}
+.quote-text em {
+  font-style: normal;
+  color: var(--teal-light);
+}
+.quote-source {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--gray-900);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 36px 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-logo {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--white);
+}
+.footer-logo span { color: var(--teal-light); }
+.footer-text {
+  font-size: 12px;
+  color: var(--gray-500);
+}
+.footer-badge {
+  font-family: var(--serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal-dim);
+}
+
+/* ─── HIDDEN DAY CONTENT ─── */
+.day-content { display: none; }
+.day-content.active { display: block; }
+
+/* ─── LOOP ARROW DECORATION ─── */
+.loop-arrow-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 32px 0;
+  overflow: hidden;
+}
+.loop-step {
+  flex: 1;
+  text-align: center;
+  padding: 14px 8px;
+  background: var(--white);
+  font-family: var(--serif);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gray-900);
+  position: relative;
+  letter-spacing: 0.05em;
+}
+.loop-step::after {
+  content: '→';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--teal);
+  font-size: 16px;
+  z-index: 2;
+}
+.loop-step:last-child::after { display: none; }
+.loop-step:first-child { border-left: 3px solid var(--teal); }
+.loop-step.highlight-step {
+  background: var(--teal-dim);
+  color: var(--white);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1100px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 120px 40px 80px; }
+  .section { padding: 80px 40px; }
+  .waste-section { padding: 80px 40px; }
+  .schedule-section { padding: 80px 40px; }
+  .loop-section { padding: 80px 40px; }
+  .commit-section { padding: 80px 40px; }
+  .quote-section { padding: 80px 40px; }
+  footer { padding: 32px 40px; }
+  nav { padding: 16px 40px; }
+  .nav-links { display: none; }
+}
+@media (max-width: 768px) {
+  .principles-grid { grid-template-columns: 1fr; }
+  .waste-grid { grid-template-columns: 1fr; }
+  .phases-container.active { grid-template-columns: 1fr 1fr; }
+  .commit-grid { grid-template-columns: 1fr; }
+  .commit-shared { flex-direction: column; gap: 16px; }
+  .hero-loop-items { grid-template-columns: 1fr; }
+  .section { padding: 60px 24px; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+}
+@media (max-width: 480px) {
+  .phases-container.active { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Break the Waste Norm</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#loops">Loops</a></li>
+    <li><a href="#commitments">Commitments</a></li>
+  </ul>
+  <button class="nav-cta">Register Now</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Workshop Program · Creative Design & Digital Media</div>
+    <h1 class="hero-title">
+      <span class="strike">Waste</span>
+      <span class="accent">Break the</span>
+      Norm
+    </h1>
+    <p class="hero-subtitle">AI IN THE LOOP — ทุบกรอบเดิม คืนพลังทีม สร้างงานจริงกับ AI</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Duration</span>
+        <span class="hero-meta-value"><span>2</span> Days</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Sessions</span>
+        <span class="hero-meta-value"><span>9</span> Modules</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Format</span>
+        <span class="hero-meta-value">Real <span>Work</span></span>
+      </div>
+    </div>
+    <div class="hero-cta-group">
+      <a href="#schedule" class="btn-primary">See Full Schedule</a>
+      <a href="#about" class="btn-ghost">Learn more</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-divider"></div>
+    <div class="hero-arrow-bg">
+      <div class="arrow-giant">→</div>
+    </div>
+    <div class="hero-panel">
+      <div class="hero-panel-title">Core Loop · AI Co-Pilot Mode</div>
+      <div class="hero-loop-items">
+        <div class="hero-loop-item">
+          <span class="hero-loop-num">01</span>
+          <span class="hero-loop-text">Fail Fast Learn Faster — ล้มในห้อง เพิ่มแต้มสำเร็จนอก</span>
+        </div>
+        <div class="hero-loop-item">
+          <span class="hero-loop-num">02</span>
+          <span class="hero-loop-text">Real Work Only — ปัญหาจริงขององค์กร ทุก Session</span>
+        </div>
+        <div class="hero-loop-item">
+          <span class="hero-loop-num">03</span>
+          <span class="hero-loop-text">Human Judgment First — AI ช่วย แต่ Human Taste ทดแทนไม่ได้</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO TICKER -->
+<div class="manifesto-strip">
+  <div class="manifesto-ticker">
+    <span class="manifesto-word highlight">Break</span>
+    <span class="manifesto-sep">✕</span>
+    <span class="manifesto-word">Waste</span>
+    <span class="manifesto-sep">→</span>
+    <span class="manifesto-word highlight">AI in the Loop</span>
+    <span class="manifesto-sep">✕</span>
+    <span class="manifesto-word">Human Judgment First</span>
+    <span class="manifesto-sep">→</span>
+    <span class="manifesto-word highlight">Real Work Only</span>
+    <span class="manifesto-sep">✕</span>
+    <span class="manifesto-word">No Case Study</span>
+    <span class="manifesto-sep">→</span>
+    <span class="manifesto-word highlight">Fail Fast</span>
+    <span class="manifesto-sep">✕</span>
+    <span class="manifesto-word">Learn Faster</span>
+    <span class="manifesto-sep">→</span>
+    <!-- duplicate for seamless loop -->
+    <span class="manifesto-word highlight">Break</span>
+    <span class="manifesto-sep">✕</span>
+    <span class="manifesto-word">Waste</span>
+    <span class="manifesto-sep">→</span>
+    <span class="manifesto-word highlight">AI in the Loop</span>
+    <span class="manifesto-sep">✕</span>
+    <span class="manifesto-word">Human Judgment First</span>
+    <span class="manifesto-sep">→</span>
+    <span class="manifesto-word highlight">Real Work Only</span>
+    <span class="manifesto-sep">✕</span>
+    <span class="manifesto-word">No Case Study</span>
+    <span class="manifesto-sep">→</span>
+    <span class="manifesto-word highlight">Fail Fast</span>
+    <span class="manifesto-sep">✕</span>
+    <span class="manifesto-word">Learn Faster</span>
+    <span class="manifesto-sep">→</span>
+  </div>
+</div>
+
+<!-- PRINCIPLES / ABOUT -->
+<section class="section" id="about">
+  <div class="section-label">Core Principles</div>
+  <h2 class="section-title">ออกแบบเพื่อทีมที่<br><em>พร้อมจะเปลี่ยน</em></h2>
+  <div class="principles-grid">
+    <div class="principle-card">
+      <span class="principle-icon">⚡</span>
+      <h3 class="principle-title">Fail Fast, Learn Faster</h3>
+      <p class="principle-body">ทุก Workshop ลองล้มเหลวในห้องเรียน เพื่อเพิ่มแต้มต่อความสำเร็จในงานจริง ไม่มีการ pitch ที่ผิดพลาดในสนามจริง — มีแค่ข้อเรียนรู้ที่ยังไม่ได้ลองใช้</p>
+    </div>
+    <div class="principle-card">
+      <span class="principle-icon">◎</span>
+      <h3 class="principle-title">Real Work Only</h3>
+      <p class="principle-body">ไม่มี Case Study สมมติ — ใช้งานและปัญหาจริงขององค์กรทุก Session ทุกชั่วโมงในห้องเรียนสร้าง Output ที่นำไปใช้งานได้ทันทีหลัง Workshop</p>
+    </div>
+    <div class="principle-card">
+      <span class="principle-icon">◈</span>
+      <h3 class="principle-title">Human Judgment First</h3>
+      <p class="principle-body">AI ไม่ใช่พระเอก — Human Taste และ Decision ยังทดแทนไม่ได้ AI ทำงานใน Co-Pilot Mode: เร่งกระบวนการ ไม่ใช่แทนที่การตัดสินใจของทีม</p>
+    </div>
+  </div>
+</section>
+
+<!-- WASTE AUDIT (BEFORE / AFTER) -->
+<section class="waste-section" id="waste">
+  <div class="section-label" style="color: var(--teal-light);">Waste Audit Results</div>
+  <h2 class="section-title">4 Wastes ที่ <em>AI พลิกได้โดยตรง</em></h2>
+
+  <div class="loop-arrow-row">
+    <div class="loop-step">รับ Brief</div>
+    <div class="loop-step">Revise</div>
+    <div class="loop-step highlight-step">รอ 14 วัน</div>
+    <div class="loop-step">ประชุม</div>
+    <div class="loop-step">ไม่ได้ข้อสรุป</div>
+    <div class="loop-step highlight-step">วนซ้ำ ✗</div>
+  </div>
+
+  <div class="waste-grid">
+    <div class="waste-card before">
+      <div class="waste-header">
+        <span class="waste-badge before">Before AI</span>
+      </div>
+      <div class="waste-item">
+        <span class="waste-metric red">14</span>
+        <div class="waste-item-text">
+          <span class="waste-item-title">วัน — บรีฟไปมา</span>
+          <span class="waste-item-sub">ไม่มีข้อมูลพอที่จะเขียน Brief ที่ดีตั้งแต่ต้น ต้องรอ Agency</span>
+        </div>
+      </div>
+      <div class="waste-item">
+        <span class="waste-metric red">∞</span>
+        <div class="waste-item-text">
+          <span class="waste-item-title">ประชุมแล้วไม่ได้ข้อสรุป</span>
+          <span class="waste-item-sub">ทุกคนเข้าห้องประชุมด้วยข้อมูลคนละชุด ยังไม่ตรงกัน → นัดใหม่</span>
+        </div>
+      </div>
+      <div class="waste-item">
+        <span class="waste-metric red">0</span>
+        <div class="waste-item-text">
+          <span class="waste-item-title">รู้ผลหลังงบหมดแล้ว</span>
+          <span class="waste-item-sub">ดูตัวเลขหลังเกม ไม่ใช่ระหว่างเกม — Reactive ตลอดเวลา</span>
+        </div>
+      </div>
+      <div class="waste-item">
+        <span class="waste-metric red">hrs</span>
+        <div class="waste-item-text">
+          <span class="waste-item-title">Pull Data ด้วยมือ</span>
+          <span class="waste-item-sub">ใช้คนทำงานที่ไม่ต้องการ Judgment ของมนุษย์</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="waste-card after">
+      <div class="waste-header">
+        <span class="waste-badge after">After AI Flip</span>
+      </div>
+      <div class="waste-item">
+        <span class="waste-metric teal">60</span>
+        <div class="waste-item-text">
+          <span class="waste-item-title">นาที — Strategic Brief</span>
+          <span class="waste-item-sub">สร้าง Brief บนฐานข้อมูลจริงใน 15 นาที จาก "รับบรีฟ" สู่ "กำหนด Direction"</span>
+        </div>
+      </div>
+      <div class="waste-item">
+        <span class="waste-metric teal">1</span>
+        <div class="waste-item-text">
+          <span class="waste-item-title">Pre-read + Decision Frame</span>
+          <span class="waste-item-sub">ทุกคนเริ่มจากจุดเดียวกัน จาก "ประชุมเพื่อหาคำตอบ" สู่ "ประชุมเพื่อตัดสินใจ"</span>
+        </div>
+      </div>
+      <div class="waste-item">
+        <span class="waste-metric teal">Real</span>
+        <div class="waste-item-text">
+          <span class="waste-item-title">Decision Trigger</span>
+          <span class="waste-item-sub">ตั้ง Trigger ก่อน Launch — แจ้งเตือนเมื่อตัวเลขเบี่ยงออกจาก Target</span>
+        </div>
+      </div>
+      <div class="waste-item">
+        <span class="waste-metric teal">Auto</span>
+        <div class="waste-item-text">
+          <span class="waste-item-title">AI Pull + Summarize</span>
+          <span class="waste-item-sub">AI Highlight จุดที่ต้องตัดสินใจ จาก "ทำ Report" สู่ "ใช้ Report"</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule-section" id="schedule">
+  <div class="section-label">2-Day Program</div>
+  <h2 class="section-title">ตาราง<em>อบรม</em>ทั้ง 2 วัน</h2>
+
+  <div class="day-tabs">
+    <button class="day-tab active" onclick="switchDay('day1', this)">Day 1 — เห็นปัญหา → ลงมือแก้</button>
+    <button class="day-tab" onclick="switchDay('day2', this)">Day 2 — จาก Workshop สู่ของจริง</button>
+  </div>
+
+  <div id="day1" class="day-content active">
+    <div class="schedule-timeline">
+      <div class="schedule-row">
+        <div class="schedule-time">10:00–11:00</div>
+        <div class="schedule-content">
+          <div class="schedule-session">AI Trends & What Actually Matters</div>
+          <div class="schedule-desc">ให้ทีมเห็นภาพใหญ่ก่อน — แต่ไม่ใช่ทุก Trend คือสิ่งที่ต้องวิ่งตาม ระบุ Shift จริง vs Hype พร้อม Brainstorm Pain Point ร่วมกัน</div>
+          <div class="schedule-tags">
+            <span class="tag joint">Joint Session</span>
+            <span class="tag ai">AI Framework</span>
+          </div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-time">11:20–12:00</div>
+        <div class="schedule-content">
+          <div class="schedule-session">Waste Audit — งานที่ยากโดยไม่จำเป็น</div>
+          <div class="schedule-desc">ให้ทีมระบุปัญหาร่วมกันด้วยตัวเอง ด้วย Post-it + Team Cluster + โหวต 3 Wastes ที่สำคัญที่สุด พร้อม AI Flip Preview</div>
+          <div class="schedule-tags">
+            <span class="tag joint">Joint Session</span>
+          </div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-time">12:00–12:30</div>
+        <div class="schedule-content">
+          <div class="schedule-session">AI-Assisted Synthesis</div>
+          <div class="schedule-desc">ฝึกให้ทีมใช้ AI ประมวลผลสิ่งที่คุยกันมาทั้งเช้า → Agreed Problem Statement 1 ชุดต่อทีม พร้อมเข้า Loop</div>
+          <div class="schedule-tags">
+            <span class="tag joint">Joint Session</span>
+            <span class="tag ai">AI Synthesis</span>
+          </div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-time">13:30–15:30</div>
+        <div class="schedule-content">
+          <div class="schedule-session">Loop A · Creative Design + Loop B · Digital Media</div>
+          <div class="schedule-desc">ลงมือจริงแบบแยกทีม — Creative: จาก 14 วันสู่ 60 นาที · Media: จากรู้ผลหลังงบหมดสู่รู้ก่อนงบหมด</div>
+          <div class="schedule-tags">
+            <span class="tag creative">Creative Design</span>
+            <span class="tag media">Digital Media</span>
+          </div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-time">15:45–16:45</div>
+        <div class="schedule-content">
+          <div class="schedule-session">Discuss to Agree — ภายในทีมและระหว่างทีม</div>
+          <div class="schedule-desc">Creative ตรวจสอบ Direction ที่ Work · Media ตรวจสอบ Trigger ที่กล้าใช้จริง แล้วสองทีมคุยร่วมกัน: จุดไหนที่ยังทำงานคนละข้อมูล?</div>
+          <div class="schedule-tags">
+            <span class="tag joint">Cross-Team</span>
+          </div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-time">16:30–17:30</div>
+        <div class="schedule-content">
+          <div class="schedule-session">Day 1 Wrap-Up</div>
+          <div class="schedule-desc">สรุป Insight และเตรียมความพร้อมสำหรับ Day 2 — Solution Showcase</div>
+          <div class="schedule-tags">
+            <span class="tag joint">Wrap-Up</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="day2" class="day-content">
+    <div class="schedule-timeline">
+      <div class="schedule-row">
+        <div class="schedule-time">10:00–11:00</div>
+        <div class="schedule-content">
+          <div class="schedule-session">Solution Showcase — ปักธง</div>
+          <div class="schedule-desc">แต่ละทีมประกาศสิ่งที่จะเปลี่ยนจริง Creative: 10+ Directions · Media: Dashboard Blueprint + Decision Trigger System</div>
+          <div class="schedule-tags">
+            <span class="tag creative">Creative Design</span>
+            <span class="tag media">Digital Media</span>
+          </div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-time">11:30–12:30</div>
+        <div class="schedule-content">
+          <div class="schedule-session">Vibe Coding · สร้าง Media Offensive Dashboard</div>
+          <div class="schedule-desc">ไม่ใช่การเขียน Code — บอก AI ว่าอยากได้อะไร แล้ว AI สร้างให้: Campaign Performance · Budget Pacing Alert · Creative Tracker · Competitive Signal Feed</div>
+          <div class="schedule-tags">
+            <span class="tag ai">Vibe Coding</span>
+            <span class="tag media">Digital Media</span>
+          </div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-time">13:30–15:00</div>
+        <div class="schedule-content">
+          <div class="schedule-session">Creative Live Case — โจทย์ค้างท่อ</div>
+          <div class="schedule-desc">ใช้โจทย์จริงที่ยังไม่ได้แก้ — สร้าง Campaign + Content จริงในห้อง แล้ว Cross-Team Handoff: Creative นำเสนอ → Media ตอบ Media Strategy ทันที</div>
+          <div class="schedule-tags">
+            <span class="tag joint">Cross-Team Handoff</span>
+            <span class="tag ai">Live Case</span>
+          </div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-time">15:45–16:30</div>
+        <div class="schedule-content">
+          <div class="schedule-session">Creative Team x Media Team</div>
+          <div class="schedule-desc">การทำงานร่วมกันบนข้อมูลชุดเดียวกันเป็นครั้งแรก — Channel, Format, Budget, Timeline ที่ทำได้จริง</div>
+          <div class="schedule-tags">
+            <span class="tag joint">Joint Strategy</span>
+          </div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-time">16:30–17:30</div>
+        <div class="schedule-content">
+          <div class="schedule-session">Final Wrap-Up · ปักธงก่อนออกจากห้องนี้</div>
+          <div class="schedule-desc">3 Commitments ต่อทีม + 1 Shared Commitment — สิ่งที่จะทำจริงภายใน 2 สัปดาห์แรกหลัง Workshop</div>
+          <div class="schedule-tags">
+            <span class="tag joint">Commitments</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE LOOPS -->
+<section class="loop-section" id="loops">
+  <div class="section-label">Loop Detail</div>
+  <h2 class="section-title">4 Phases ต่อทีม<br><em>ลงมือจริงทุก Minute</em></h2>
+
+  <div class="loop-tabs">
+    <button class="loop-tab active" onclick="switchLoop('creative', this)">Loop A · Creative Design</button>
+    <button class="loop-tab" onclick="switchLoop('media', this)">Loop B · Digital Media</button>
+  </div>
+
+  <div id="creative" class="phases-container active">
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-num">Phase 01</div>
+        <div class="phase-title">AI as Social Listening + Deep Research</div>
+        <div class="phase-time">0–15 นาที</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-points">
+          <li>ป้อน Product/Campaign → AI ดึง Trend, Sentiment, Competitive Landscape</li>
+          <li>หาช่องว่างที่ยังไม่มีใครเล่น</li>
+        </ul>
+        <div class="phase-output">
+          <div class="phase-output-label">Output</div>
+          <div class="phase-output-text">ภาพรวมตลาดที่หนักแน่นกว่า Marketing Brief ทั่วไป — ใน 15 นาที</div>
+        </div>
+      </div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-num">Phase 02</div>
+        <div class="phase-title">AI as 4 Strategic Planners</div>
+        <div class="phase-time">15–35 นาที</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-points">
+          <li>AI #1: Brand Truth & Positioning</li>
+          <li>AI #2: Consumer Insight ที่ยังไม่มีใครพูดถึง</li>
+          <li>AI #3: Culture & Trend Moment</li>
+          <li>AI #4: Devil's Advocate</li>
+        </ul>
+        <div class="phase-output">
+          <div class="phase-output-label">Output</div>
+          <div class="phase-output-text">4 Strategic Directions จาก Logic ต่างกัน — ใน 20 นาที</div>
+        </div>
+      </div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-num">Phase 03</div>
+        <div class="phase-title">AI Builds Full Creative Board</div>
+        <div class="phase-time">35–50 นาที</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-points">
+          <li>Campaign Concept + Key Message</li>
+          <li>Channel Strategy + Tone of Voice</li>
+          <li>1st Execution Idea ต่อ Direction</li>
+        </ul>
+        <div class="phase-output">
+          <div class="phase-output-label">Output</div>
+          <div class="phase-output-text">Creative Board 4–5 Directions พร้อม Execution Idea — ใน 15 นาที</div>
+        </div>
+      </div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-num">Phase 04</div>
+        <div class="phase-title">Reverse Engineering Back to Brief</div>
+        <div class="phase-time">50–60 นาที</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-points">
+          <li>AI ถามย้อน: ถ้า Direction นี้ถูก Brief ที่ดีควรเป็นอย่างไร?</li>
+        </ul>
+        <div class="phase-output">
+          <div class="phase-output-label">2 Outputs</div>
+          <div class="phase-output-text">Brief สำหรับทีม Creative + Brief ส่งกลับ Marketing — เสนอทิศทางแทนการรอรับ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="media" class="phases-container">
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-num">Phase 01</div>
+        <div class="phase-title">AI as Pre-Launch Intelligence Engine</div>
+        <div class="phase-time">0–15 นาที</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-points">
+          <li>ป้อน Platform Data จาก Campaign ที่ผ่านมา (CTR, CPM, ROAS)</li>
+          <li>AI วิเคราะห์ Pattern — Budget Risk, Audience Overlap</li>
+        </ul>
+        <div class="phase-output">
+          <div class="phase-output-label">Output</div>
+          <div class="phase-output-text">Pre-Launch Risk Map — รู้ก่อนเริ่มว่าจุดไหนอาจไหม้</div>
+        </div>
+      </div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-num">Phase 02</div>
+        <div class="phase-title">AI as Real-Time Optimization Advisor</div>
+        <div class="phase-time">15–35 นาที</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-points">
+          <li>ถ้า CTR ต่ำกว่า X% ใน 48 ชม.: เปลี่ยน Creative หรือ Narrow Audience</li>
+          <li>ถ้า CPM สูงกว่า Benchmark: Shift งบออกทันที</li>
+          <li>ถ้า Frequency เกิน N ครั้ง: Refresh Creative</li>
+        </ul>
+        <div class="phase-output">
+          <div class="phase-output-label">Output</div>
+          <div class="phase-output-text">Optimization Playbook ที่ใช้ได้กับทุก Campaign ต่อจากนี้</div>
+        </div>
+      </div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-num">Phase 03</div>
+        <div class="phase-title">AI as Media Mix Strategist</div>
+        <div class="phase-time">35–50 นาที</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-points">
+          <li>Scenario A: Heavy Meta 70% + Google 30%</li>
+          <li>Scenario B: Balanced Meta 40% + TikTok 40% + Google 20%</li>
+          <li>Scenario C: TikTok-first 60% + Retargeting Meta 40%</li>
+        </ul>
+        <div class="phase-output">
+          <div class="phase-output-label">Output</div>
+          <div class="phase-output-text">Media Mix Recommendation ที่มี Data รองรับ ไม่ใช่แค่ความเคยชิน</div>
+        </div>
+      </div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-num">Phase 04</div>
+        <div class="phase-title">AI as Campaign Review Accelerator</div>
+        <div class="phase-time">50–60 นาที</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-points">
+          <li>AI สรุป What Worked / What Didn't พร้อมอธิบายว่าทำไม</li>
+          <li>Pattern ที่หยิบไปใช้ Campaign หน้าได้เลย</li>
+        </ul>
+        <div class="phase-output">
+          <div class="phase-output-label">Output</div>
+          <div class="phase-output-text">บทเรียนใน 10 นาที + Brief Campaign ถัดไปพร้อมใช้</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMITMENTS -->
+<section class="commit-section" id="commitments">
+  <div class="commit-bg-text">→</div>
+  <div class="section-label" style="color: var(--teal-light);">What Happens After</div>
+  <h2 class="section-title" style="color: var(--white);">Commitments ก่อน<br>ออกจากห้องนี้</h2>
+
+  <div class="commit-grid">
+    <div class="commit-team">
+      <span class="commit-team-tag creative">Creative Design Team</span>
+      <h3 class="commit-team-title">3 สิ่งที่จะทำจริงภายใน 2 สัปดาห์</h3>
+      <ul class="commit-items">
+        <li>Workflow ที่จะเปลี่ยนทันที — ไม่รอ Brief จาก Marketing</li>
+        <li>งานชิ้นแรกที่จะใช้ AI Loop จริง — Campaign Direction</li>
+        <li>สิ่งที่จะเสนอ Marketing ในสัปดาห์หน้า — Direction แทนการรับ Brief</li>
+      </ul>
+    </div>
+    <div class="commit-team">
+      <span class="commit-team-tag media">Digital Media Team</span>
+      <h3 class="commit-team-title">3 สิ่งที่จะทำจริงภายใน 2 สัปดาห์</h3>
+      <ul class="commit-items">
+        <li>Dashboard ที่จะ Launch ภายใน 2 สัปดาห์ — Media Offensive</li>
+        <li>Campaign แรกที่จะใช้ Decision Trigger — ไม่รู้ผลหลังงบหมด</li>
+        <li>Metric ที่จะวัดว่า Loop นี้ Work หรือไม่</li>
+      </ul>
+    </div>
+    <div class="commit-shared">
+      <div class="commit-shared-icon">∞</div>
+      <div class="commit-shared-body">
+        <div class="commit-shared-label">1 Shared Commitment · Between Teams</div>
+        <p class="commit-shared-text">สองทีมตกลงร่วมกัน 1 อย่างที่จะเปลี่ยนวิธีทำงานระหว่างกัน — จากที่เคยทำงาน<strong>คนละข้อมูล</strong> สู่การเริ่มต้นจาก<strong>ฐานข้อมูลเดียวกันทุกครั้ง</strong> นี่คือ Single Source of Truth ที่ทั้งสองทีมต้องการ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING QUOTE -->
+<section class="quote-section">
+  <div class="quote-mark">"</div>
+  <p class="quote-text">รูปธรรมการถมรอยโหว่ของกระบวนการทำงาน ด้วย AI ที่พลิกจาก<em>ผู้ตามเกม</em> เป็น<em>เดินหน้าไปพร้อมกับทีม Marketing</em> และเพิ่มศักยภาพการนำหน้า Supplier</p>
+  <div class="quote-source">Break the Waste Norm → AI IN THE LOOP</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Break the <span>Waste</span> Norm</div>
+  <div class="footer-text">Creative Design & Digital Media Workshop · 2 Days · 9 Sessions</div>
+  <div class="footer-badge">AI IN THE LOOP →</div>
+</footer>
+
+<script>
+function switchDay(dayId, btn) {
+  document.querySelectorAll('.day-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.day-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(dayId).classList.add('active');
+  btn.classList.add('active');
+}
+function switchLoop(loopId, btn) {
+  document.querySelectorAll('.phases-container').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.loop-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(loopId).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
